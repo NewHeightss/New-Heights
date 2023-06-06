@@ -3,10 +3,16 @@ const app = express();
 const path = require('path');
 const PORT = 3000;
 
+// require routers
+const apiRouter = require('./routes/api.js');
+
 //server index page to root endpoint
 app.get('/', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, '../src/index.html'));
 })
+
+//routes handles
+app.use('/api', apiRouter);
 
 //local error handler
 app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
