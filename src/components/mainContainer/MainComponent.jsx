@@ -119,7 +119,8 @@ export default function MainComponent() {
           <Table.Column key={column.key}>{column.label}</Table.Column>
         )}
       </Table.Header>
-      <Table.Body items={rows}>
+
+      {rows && <Table.Body items={rows}>
         {(item) => (
           <Table.Row key={item.key}>
             {(columnKey) => (
@@ -127,7 +128,9 @@ export default function MainComponent() {
             )}
           </Table.Row>
         )}
-      </Table.Body>
+      </Table.Body>}
+      
+      
     </Table>
   );
 }
