@@ -10,6 +10,11 @@ const loginController = require('../controllers/loginController');
 //     res.status(200).send()
 // })
 
+
+router.get('/login', loginController.verifyUser, (req, res) => {
+    res.status(200).send();
+})
+
 // job application routes
 router.get('/application/:user_id', jobAppsController.getApplications, (req, res) => {
     res.status(200).json(res.locals.apps);
