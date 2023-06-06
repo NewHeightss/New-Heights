@@ -3,8 +3,23 @@ const app = express();
 const path = require('path');
 const PORT = 3000;
 
+// require routers
+const apiRouter = require('./routes/api.js');
+
+// body parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
+
+//routes handles
+app.use('/', apiRouter);
+
+//test
+app.get('/express_backend', (req, res) => {
+  res.send({ express: 'express backend is now connected'})
+});
+
 //server index page to root endpoint
-app.get('/', (req, res)=>{
+app.use((req, res)=>{
     res.status(200).sendFile(path.join(__dirname, '../src/index.html'));
 })
 
