@@ -2,68 +2,67 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  entry: './src/index.js',
 
-    entry: './src/index.js', 
-    
-    output: {
-        path: path.join(__dirname, '/dist'),
-        publicPath: '/',
-        filename: 'bundle.js'
+  output: {
+    path: path.join(__dirname, '/dist'),
+    publicPath: '/',
+    filename: 'bundle.js',
+  },
+
+  devtool: 'eval-source-map',
+
+  mode: 'development',
+
+  devServer: {
+    host: 'localhost',
+    port: 8080,
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+      publicPath: '/',
     },
-
-    devtool: 'eval-source-map',
-
-    mode: 'development',
-
-    devServer: {
-        host: 'localhost',
-        port: 8080,
-        static: {
-            directory: path.resolve(__dirname, 'dist'),
-            publicPath: '/',
-        },
-        hot: true,
-        historyApiFallback: true,
-        headers: { 'Access-Control-Allow-Origin': '*'},
-        proxy: {
-            '/api/**': {
-                target: 'http://localhost:3000/',
-                secure: false,
-            },
-            '/assets/**': {
-                target: 'http://localhost:3000/',
-                secure: false,
-            },
-        },
+    hot: true,
+    historyApiFallback: true,
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    proxy: {
+      '/api/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+      '/assets/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
     },
+  },
 
-    plugins: [
-        new HTMLWebpackPlugin({
-            template: './src/index.html'
-        }),
+  plugins: [
+    new HTMLWebpackPlugin({
+      template: './src/index.html',
+    }),
+  ],
+
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(gif|png|jpe?g|svg|xml|mp3)$/i,
+        // exclude: /node_modules/,
+        use: 'file-loader',
+      },
     ],
-
-    module: {
-        rules: [
-            {
-                test: /.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react']
-                    }
-                }
-            },
-            {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
-              },
-              {
-                test: /\.(gif|png|jpe?g|svg|xml|mp3)$/i,
-                // exclude: /node_modules/,
-                use: 'file-loader',
-              },
-        ]
-    }
-}
+  },
+};
