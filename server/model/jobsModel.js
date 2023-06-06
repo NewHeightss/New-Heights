@@ -3,7 +3,7 @@ require('dotenv').config();
 const PG_URI = process.env.ELEPHANT_URL;
 
 const pool = new Pool({
-    connectionString: PG_URI,
+  connectionString: PG_URI,
 });
 
 module.exports = {
