@@ -6,15 +6,22 @@ const PORT = 3000;
 // require routers
 const apiRouter = require('./routes/api.js');
 
-//routes handles
-app.use('/api', apiRouter);
+// body parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
 
+//routes handles
+app.use('/', apiRouter);
+
+//test
+app.get('/express_backend', (req, res) => {
+  res.send({ express: 'express backend is now connected'})
+});
 
 //server index page to root endpoint
 app.use((req, res)=>{
     res.status(200).sendFile(path.join(__dirname, '../src/index.html'));
 })
-
 
 //local error handler
 app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
