@@ -8,10 +8,10 @@ import {
   Row,
   Checkbox,
 } from '@nextui-org/react';
-// import { Mail } from "./Mail";
-// import { Password } from "./Password";
 
-export default function AddApplication() {
+export default function AddApplication(props) {
+  const {columns, rows, setRows} = props;
+
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = React.useState(new Set(['text']));
 
@@ -26,6 +26,11 @@ export default function AddApplication() {
     setVisible(false);
     console.log('closed');
   };
+
+  const populateTable = (data) => {
+    console.log(Input.value);
+    closeHandler();
+  }
 
   return (
     <div>
@@ -45,50 +50,51 @@ export default function AddApplication() {
         </Modal.Header>
         <Modal.Body>
           <Input
+            aria-label='text'
             clearable
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="Company Name"
-            // contentLeft={<Mail fill="currentColor" />}
+            onChange={(e) => {setRows()}}
           />
 
           <Input
+            aria-label='text'
             clearable
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="Date Applied"
-            // contentLeft={<Password fill="currentColor" />}
           />
           <Input
+           aria-label='text'
             clearable
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="Position"
-            // contentLeft={<Mail fill="currentColor" />}
           />
           <Input
+            aria-label='text'
             clearable
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="City"
-            // contentLeft={<Mail fill="currentColor" />}
           />
           <Input
+            aria-label='text'
             clearable
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="Notes"
-            // contentLeft={<Mail fill="currentColor" />}
           />
           <Dropdown>
             <Dropdown.Button flat>{selectedValue}</Dropdown.Button>
@@ -113,29 +119,29 @@ export default function AddApplication() {
             </Dropdown.Menu>
           </Dropdown>
           <Input
+            aria-label='text'
             clearable
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="Application Type"
-            // contentLeft={<Mail fill="currentColor" />}
           />
           <Input
+            aria-label='text'
             clearable
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="Link To Listing"
-            // contentLeft={<Mail fill="currentColor" />}
           />
         </Modal.Body>
         <Modal.Footer>
           <Button auto flat color="error" onPress={closeHandler}>
             Close
           </Button>
-          <Button auto onPress={closeHandler}>
+          <Button auto onPress={() => {populateTable(Input.value)}}>
             Done
           </Button>
         </Modal.Footer>

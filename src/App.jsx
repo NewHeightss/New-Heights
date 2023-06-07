@@ -48,8 +48,8 @@ export default function App() {
   return (
     <div>
       <h1>This is App</h1>
-      <AddApplication/>
-      <MainComponent columns={columns} rows={rows} />
+      <AddApplication columns={columns} rows={rows} setRows={setRows}/>
+      <MainComponent columns={columns} rows={rows} setRows={setRows}/>
     </div>
   );
 }

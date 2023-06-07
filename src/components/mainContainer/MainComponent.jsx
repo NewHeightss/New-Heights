@@ -11,28 +11,40 @@ import {
 // import AddApplication from './AddApplication.jsx';
 
 export default function MainComponent(props) {
-  const { columns, rows } = props;
+  const { columns, rows, setRows } = props;
   //fetch call to db to get data, formatted into array of instances
   //add edit button to each instance
   // async function getJobData() {
-  //   const data = await fetch('/Endpoint');
-  //   //parsed data - CHECK THIS FOR ACCURACY
-  //   const jobApps = data.json();
   //   try {
+  //     const data = await fetch('/application/1');
+  //     console.log('data: ', data)
+  //     const jobApps = await data.json();
+  //     console.log('jobApps: ', jobApps)
+
   //     jobApps.map((job, index) => {
   //       //create new tableRow
-  //       //assign unique key
-  //       <Button>Edit</Button>;
-  //       // <Row  />
-  //       // <Table.Row key=`${index+1}`>
-  //       //   <Table.Cell></Table.Cell>
-  //       // </Table.Row>
+  //       setRows([...job])
+  //       console.log('rows:' , rows)
   //     });
-  //   } catch (err) {}
+  //   } catch (err) {
+  //     throw new Error ('cannot populate table with getJobData function')
+  //   }
   // }
-  //EXAMPLE
+  function getJobData() {
+    fetch('/application/1')
+      .then(response => response.json())
+      .then((data) => {
+        console.log('data: ', data)
+        setRows([...data]);
+        return data
+      })
+      .catch((err) => 'cant populate table')
+      .finally(() => console.log('Fulfilled promise!'));
 
-
+   
+  }
+  getJobData();
+  
   function renderCell(job, columnKey) {
     console.log('job: ', job);
     console.log('column: ', columnKey);

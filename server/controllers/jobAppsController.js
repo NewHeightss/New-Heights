@@ -10,6 +10,10 @@ jobAppsController.getApplications = async (req, res, next) => {
     const userId = req.params.user_id;
     const sqlGetApps = `SELECT * FROM job_applications WHERE user_id = ${userId}`;
     const result = await db.query(sqlGetApps);
+    console.log(result.rows)
+    result.rows.map((row, index) => {
+      row['key'] = index + 1
+    })
     res.locals.apps = result.rows;
     return next();
 } catch(err) {
@@ -19,7 +23,7 @@ jobAppsController.getApplications = async (req, res, next) => {
     })
   }
 }
-
+// MY HEADPHONES DIED SO IM CHARGING IT RN BUT ILL STILL BE ON
 // middleware for posting new job application
 
 jobAppsController.addApplication = async (req, res, next) => {
