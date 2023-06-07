@@ -14,9 +14,9 @@ app.use(express.urlencoded({ extended: true}));
 app.use('/', apiRouter);
 
 //test
-app.get('/express_backend', (req, res) => {
-  res.send({ express: 'express backend is now connected'})
-});
+// app.get('/express_backend', (req, res) => {
+//   res.send({ express: 'express backend is now connected'})
+// });
 
 //server index page to root endpoint
 app.use((req, res)=>{

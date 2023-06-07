@@ -1,0 +1,28 @@
+---
+  version: '3'
+  services:
+    app:
+      image: newheights/app
+      container_name: new-heights-app
+      build: .
+      ports:
+        - "8080:8080"
+        - "3000:3000"
+      volumes:
+        - .:/usr/src/app
+        - node_modules:/usr/src/app/node_modules
+      command: npm-start
+      depends_on:
+        - postgres-db
+    postgres-db:
+      image: newheights/postgres
+      container_name: new-heights-postgres-db
+      environment:
+        - POSTGRES_PASSWORD=gbBR1LYkaOcxBK_5dSgKJ4yUnoE9X0vD
+        - POSTGRES_USER=uajberhb
+        - POSTGRES_DB=uajberhb
+      volumes: 
+        - db-data:/var/lib/postgresql/data
+  volumes:
+    node_modules:
+    db-data:

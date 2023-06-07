@@ -14,7 +14,7 @@ CREATE TABLE users (
     "_id" serial NOT NULL,
     "google_id" integer NOT NULL,
     CONSTRAINT "user_pk" PRIMARY KEY("_id")
-)
+);
 
 CREATE TABLE job_applications (
     "_id" serial NOT NULL, 
@@ -32,4 +32,6 @@ CREATE TABLE job_applications (
     CONSTRAINT "users_fk"
         FOREIGN KEY ("user_id")
         REFERENCES users ("_id")
-)
+);
+
+ALTER TABLE users ADD COLUMN username VARCHAR(255) NOT NULL, ADD COLUMN password VARCHAR(255) NOT NULL;

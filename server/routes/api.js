@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const jobAppsController = require('../controllers/jobAppsController');
-const cookieController = require('../controllers/cookieController');
-const loginController = require('../controllers/loginController');
+// const cookieController = require('../controllers/cookieController');
+// const loginController = require('../controllers/loginController');
 
-// login routes
+// // login routes
 
-router.get('/signup', loginController.createUser, (req, res) => {
-    res.redirect('/');
-})
-router.get('/login', loginController.verifyUser, (req, res) => {
-    res.redirect('/');
-})
+// router.get('/signup', loginController.createUser, (req, res) => {
+//     res.redirect('/');
+// })
+// router.get('/login', loginController.verifyUser, (req, res) => {
+//     res.redirect('/');
+// })
 
 // job application routes
 router.get('/application/:user_id', jobAppsController.getApplications, (req, res) => {
