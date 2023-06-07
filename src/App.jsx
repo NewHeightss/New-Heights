@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import { NextUIProvider } from '@nextui-org/react';
 import MainComponent from './components/mainContainer/MainComponent.jsx';
 import AddApplication from './components/mainContainer/AddApplication.jsx';
@@ -54,25 +54,21 @@ export default function App() {
   ];
 
   // conditionally render page depending on if user is logged in
-  let components;
-  if (loggedIn) {
-    components = 
-    <div>
-      <h1>This is App</h1>
-      <AddApplication/>
-      <MainComponent columns={columns} rows={rows} />
-    </div>
-  }
-  else {
-    components = <Home/>
-  }
+
+  const components =
+  <div>
+    <h1>This is App</h1>
+    <AddApplication/>
+    <MainComponent columns={columns} rows={rows} />
+  </div>
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path='/' element={components}></Route>
+        <Route exact path='/' element={<Home/>}></Route>
         <Route path='/login' element={<Login setLoggedIn={setLoggedIn}/>}></Route>
         <Route path='/signup' element={<Signup setLoggedIn={setLoggedIn}/>}></Route>
+        <Route path='/home' element={components}></Route>
       </Routes>
     </BrowserRouter>
   );

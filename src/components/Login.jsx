@@ -16,6 +16,9 @@ const checkUser = async () => {
 }
 
 export default function Login({ setLoggedIn }) {
+  const handleClick = () => {
+    setLoggedIn(true);
+  }
   return (
     <div className="flexbox">
         <Text h2>Welcome to New Heights</Text>
@@ -24,7 +27,9 @@ export default function Login({ setLoggedIn }) {
         <Spacer y={1.5} />
         <Input.Password bordered labelPlaceholder="Password" className="input"/>
         <Spacer y={1.5} />
-        <Button color="gradient">Submit</Button>
+        <Link to="/home">
+          <Button color="gradient" onClick={handleClick}>Submit</Button>
+        </Link>
     </div>
   )
 }

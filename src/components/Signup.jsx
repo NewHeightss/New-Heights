@@ -5,12 +5,16 @@ import {
     Input,
     Spacer
   } from '@nextui-org/react';
+import { Link } from 'react-router-dom';
 
 const addUser = () => {
     // fetch call to add new user to database
 }
 
 export default function Signup({ setLoggedIn }) {
+    const handleClick = () => {
+        setLoggedIn(true);
+      }
     return (
         <div className="flexbox">
             <Text h2>Welcome to New Heights</Text>
@@ -19,7 +23,9 @@ export default function Signup({ setLoggedIn }) {
             <Spacer y={1.5} />
             <Input.Password bordered labelPlaceholder="Password"className="input" />
             <Spacer y={1.5} />
-            <Button color="gradient">Sign Up</Button>
+            <Link to="/home">
+                <Button color="gradient" onClick={handleClick}>Sign Up</Button>
+            </Link>
         </div>
     )
 }
