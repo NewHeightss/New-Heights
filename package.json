@@ -28,6 +28,7 @@
     "node-fetch": "^3.3.1",
     "nodemon": "^2.0.22",
     "passport": "^0.6.0",
+    "passport-google-oidc": "^0.1.0",
     "pg": "^8.11.0",
     "react": "^18.2.0",
     "react-router": "^6.11.2",

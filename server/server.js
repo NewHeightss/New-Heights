@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
+const passport = require('passport');
 const path = require('path');
 const PORT = 3000;
+require('./new-heights/passport-config.js')
+
 
 // require routers
 const apiRouter = require('./routes/api.js');
@@ -10,13 +13,21 @@ const apiRouter = require('./routes/api.js');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
-//routes handles
-app.use('/', apiRouter);
+app.use(passport.initialize());
+app.use(passport.session());
 
-//test
-app.get('/express_backend', (req, res) => {
-  res.send({ express: 'express backend is now connected'})
-});
+//routes handles
+app.use('/api', apiRouter);
+
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    res.redirect('/profile');
+  }
+);
 
 //server index page to root endpoint
 app.use((req, res)=>{

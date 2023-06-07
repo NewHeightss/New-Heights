@@ -4,9 +4,13 @@ const jobAppsController = require('../controllers/jobAppsController');
 const cookieController = require('../controllers/cookieController');
 const loginController = require('../controllers/loginController');
 
+// oauth imports
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oidc');
+
 // login routes
 
-// router.get('/login', cookieController.checkUser, loginController.verifyUser, (req, res) => {
+// router.get('/login', cookieController.checkUser, passport.authenticate('google'), loginController.verifyUser, (req, res) => {
 //     res.status(200).send()
 // })
 
