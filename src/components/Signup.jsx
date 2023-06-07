@@ -10,14 +10,14 @@ const addUser = () => {
     // fetch call to add new user to database
 }
 
-export default function Signup() {
+export default function Signup({ setLoggedIn }) {
     return (
         <div className="flexbox">
             <Text h2>Welcome to New Heights</Text>
             <Spacer y={1.5} />
-            <Input bordered labelPlaceholder="Username" />
+            <Input bordered labelPlaceholder="Username" className="input"/>
             <Spacer y={1.5} />
-            <Input.Password bordered labelPlaceholder="Password" />
+            <Input.Password bordered labelPlaceholder="Password"className="input" />
             <Spacer y={1.5} />
             <Button color="gradient">Sign Up</Button>
         </div>
