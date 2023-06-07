@@ -6,9 +6,12 @@ const loginController = require('../controllers/loginController');
 
 // login routes
 
-// router.get('/login', cookieController.checkUser, loginController.verifyUser, (req, res) => {
-//     res.status(200).send()
-// })
+router.get('/signup', loginController.createUser, (req, res) => {
+    res.redirect('/');
+})
+router.get('/login', loginController.verifyUser, (req, res) => {
+    res.redirect('/');
+})
 
 // job application routes
 router.get('/application/:user_id', jobAppsController.getApplications, (req, res) => {
