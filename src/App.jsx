@@ -53,14 +53,24 @@ export default function App() {
     },
   ];
 
-  // conditionally render page depending on if user is logged in
+  const [rows, setRows] = useState([])
+  const [companyName, setCompanyName] = useState('');
+  const [dateApplied, setDateApplied] = useState('');
+  const [cityName, setCityName] = useState('');
+  const [positionName, setPositionName] = useState('');
+  const [status, setStatus] = useState('');
+  const [notesTxt, setNotesTxt] = useState('');
+  const [listingLink, setListingLink] = useState('')
+
+
 
   const components =
   <div>
     <h1>This is App</h1>
-    <AddApplication/>
-    <MainComponent columns={columns} rows={rows} />
-  </div>
+    <AddApplication columns={columns} rows={rows} setRows={setRows} companyName={companyName} setCompanyName={setCompanyName} dateApplied={dateApplied} setDateApplied={setDateApplied} 
+    cityName={cityName} setCityName={setCityName} positionName={positionName} setPositionName={setPositionName} status={status} setStatus={setStatus} notesTxt={notesTxt} setNotesTxt={setNotesTxt} listingLink={listingLink} setListingLink={setListingLink} />
+    <MainComponent columns={columns} rows={rows} setRows={setRows}/>
+</div>
 
   return (
     <BrowserRouter>

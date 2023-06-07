@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Table,
   Row,
@@ -7,35 +7,30 @@ import {
   User,
   Text,
   Button,
+  Input, 
+  useInput
 } from '@nextui-org/react';
 // import AddApplication from './AddApplication.jsx';
 
 export default function MainComponent(props) {
-  const { columns, rows } = props;
+  const { columns, rows, setRows } = props;
   //fetch call to db to get data, formatted into array of instances
-  //add edit button to each instance
-  // async function getJobData() {
-  //   const data = await fetch('/Endpoint');
-  //   //parsed data - CHECK THIS FOR ACCURACY
-  //   const jobApps = data.json();
-  //   try {
-  //     jobApps.map((job, index) => {
-  //       //create new tableRow
-  //       //assign unique key
-  //       <Button>Edit</Button>;
-  //       // <Row  />
-  //       // <Table.Row key=`${index+1}`>
-  //       //   <Table.Cell></Table.Cell>
-  //       // </Table.Row>
-  //     });
-  //   } catch (err) {}
-  // }
-  //EXAMPLE
-
-
+  function getJobData() {
+    fetch('http://localhost:3000/application/1')
+      .then(response => response.json())
+      .then((data) => {
+        setRows([...data]);
+        return data
+      })
+      .catch((err) => 'cant populate table')
+      .finally(() => console.log('Fulfilled promise!'));
+  }
+  // getJobData();
+  useEffect(() => {
+    getJobData();
+  }, [])
+  
   function renderCell(job, columnKey) {
-    console.log('job: ', job);
-    console.log('column: ', columnKey);
     if (columnKey === 'action') {
       return (
         <Row>

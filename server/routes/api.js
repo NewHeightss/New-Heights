@@ -19,7 +19,7 @@ router.get('/application/:user_id', jobAppsController.getApplications, (req, res
 })
 
 router.post('/application', jobAppsController.addApplication, (req, res) => {
-    res.status(200).send('Successfully added application')
+    res.status(200).json(res.locals.newApp)
 })
 
 router.delete('/application/:application_id', jobAppsController.deleteApplication, (req, res) => {
