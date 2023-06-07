@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Table,
   Row,
@@ -7,31 +7,17 @@ import {
   User,
   Text,
   Button,
+  Input, 
+  useInput
 } from '@nextui-org/react';
 // import AddApplication from './AddApplication.jsx';
 
 export default function MainComponent(props) {
   const { columns, rows, setRows } = props;
+  console.log('rows: ', rows)
   //fetch call to db to get data, formatted into array of instances
-  //add edit button to each instance
-  // async function getJobData() {
-  //   try {
-  //     const data = await fetch('/application/1');
-  //     console.log('data: ', data)
-  //     const jobApps = await data.json();
-  //     console.log('jobApps: ', jobApps)
-
-  //     jobApps.map((job, index) => {
-  //       //create new tableRow
-  //       setRows([...job])
-  //       console.log('rows:' , rows)
-  //     });
-  //   } catch (err) {
-  //     throw new Error ('cannot populate table with getJobData function')
-  //   }
-  // }
   function getJobData() {
-    fetch('/application/1')
+    fetch('http://localhost:3000/application/1')
       .then(response => response.json())
       .then((data) => {
         console.log('data: ', data)
@@ -40,10 +26,11 @@ export default function MainComponent(props) {
       })
       .catch((err) => 'cant populate table')
       .finally(() => console.log('Fulfilled promise!'));
-
-   
   }
-  getJobData();
+  // getJobData();
+  useEffect(() => {
+    getJobData();
+  }, [])
   
   function renderCell(job, columnKey) {
     console.log('job: ', job);

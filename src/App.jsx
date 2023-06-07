@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 // import { NextUIProvider } from '@nextui-org/react';
 import MainComponent from './components/mainContainer/MainComponent.jsx';
 import AddApplication from './components/mainContainer/AddApplication.jsx';
@@ -44,11 +44,19 @@ export default function App() {
   ];
 
   const [rows, setRows] = useState([])
-  
+  const [companyName, setCompanyName] = useState('');
+  const [dateApplied, setDateApplied] = useState('');
+  const [cityName, setCityName] = useState('');
+  const [positionName, setPositionName] = useState('');
+  const [status, setStatus] = useState('');
+  const [notesTxt, setNotesTxt] = useState('');
+  const [listingLink, setListingLink] = useState('')
+
   return (
     <div>
       <h1>This is App</h1>
-      <AddApplication columns={columns} rows={rows} setRows={setRows}/>
+      <AddApplication columns={columns} rows={rows} setRows={setRows} companyName={companyName} setCompanyName={setCompanyName} dateApplied={dateApplied} setDateApplied={setDateApplied} 
+      cityName={cityName} setCityName={setCityName} positionName={positionName} setPositionName={setPositionName} status={status} setStatus={setStatus} notesTxt={notesTxt} setNotesTxt={setNotesTxt} listingLink={listingLink} setListingLink={setListingLink} />
       <MainComponent columns={columns} rows={rows} setRows={setRows}/>
     </div>
   );
