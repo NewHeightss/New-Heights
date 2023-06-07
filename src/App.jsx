@@ -12,8 +12,6 @@ import Signup from './components/Signup.jsx';
 export default function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
-  const [rows, setRows] = useState([])
-
   const columns = [
     {
       key: 'company_name',

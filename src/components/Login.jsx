@@ -5,6 +5,7 @@ import {
     Input,
     Spacer
   } from '@nextui-org/react';
+  import { Link } from 'react-router-dom';
 
 const checkUser = async () => {
     try {
