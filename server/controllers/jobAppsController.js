@@ -10,7 +10,6 @@ jobAppsController.getApplications = async (req, res, next) => {
     const userId = req.params.user_id;
     const sqlGetApps = `SELECT * FROM job_applications WHERE user_id = ${userId}`;
     const result = await db.query(sqlGetApps);
-    console.log(result.rows)
     result.rows.map((row, index) => {
       row['key'] = index + 1
     })
@@ -23,15 +22,19 @@ jobAppsController.getApplications = async (req, res, next) => {
     })
   }
 }
-// MY HEADPHONES DIED SO IM CHARGING IT RN BUT ILL STILL BE ON
-// middleware for posting new job application
 
+// middleware for posting new job application
 jobAppsController.addApplication = async (req, res, next) => {
   try {
-    const { company_name, position_name, city_name, notes_txt, status, application_type, listing_link, user_id } = req.body;
+    const { company_name, position_name, city_name, notes_txt, status, application_type, listing_link, user_id, length } = req.body;
     const sqlAddApp = `INSERT INTO job_applications(company_name, position_name, city_name, notes_txt, status, application_type, listing_link, user_id) 
-    VALUES('${company_name}', '${position_name}', '${city_name}', '${notes_txt}', '${status}', '${application_type}', '${listing_link}', '${user_id}')`;
+    VALUES('${company_name}', '${position_name}', '${city_name}', '${notes_txt}', '${status}', '${application_type}', '${listing_link}', '${user_id}')
+    RETURNING *`;
     const result = await db.query(sqlAddApp);
+    console.log('result: ', result.rows)//rows[0]?
+    const newJob = result.rows[0]
+    newJob['key'] = length + 1;
+    res.locals.newApp = newJob; //rows[0]?
     return next();
   } catch(err) {
     return next({

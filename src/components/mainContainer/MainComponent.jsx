@@ -14,13 +14,11 @@ import {
 
 export default function MainComponent(props) {
   const { columns, rows, setRows } = props;
-  console.log('rows: ', rows)
   //fetch call to db to get data, formatted into array of instances
   function getJobData() {
     fetch('http://localhost:3000/application/1')
       .then(response => response.json())
       .then((data) => {
-        console.log('data: ', data)
         setRows([...data]);
         return data
       })
@@ -33,8 +31,6 @@ export default function MainComponent(props) {
   }, [])
   
   function renderCell(job, columnKey) {
-    console.log('job: ', job);
-    console.log('column: ', columnKey);
     if (columnKey === 'action') {
       return (
         <Row>
