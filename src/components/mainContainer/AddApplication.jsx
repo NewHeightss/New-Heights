@@ -1,17 +1,30 @@
-import React , {useState} from "react";
-import { Dropdown, Modal, Button, Text, Input, Row, Checkbox } from "@nextui-org/react";
+import React, { useState } from 'react';
+import {
+  Dropdown,
+  Modal,
+  Button,
+  Text,
+  Input,
+  Row,
+  Checkbox,
+} from '@nextui-org/react';
 // import { Mail } from "./Mail";
 // import { Password } from "./Password";
 
 export default function AddApplication() {
   const [visible, setVisible] = useState(false);
-  const [selected, setSelected] = useState('Status');
-  
+  const [selected, setSelected] = React.useState(new Set(['text']));
+
+  const selectedValue = React.useMemo(
+    () => Array.from(selected).join(', ').replaceAll('_', ' '),
+    [selected]
+  );
+
   const handler = () => setVisible(true);
 
   const closeHandler = () => {
     setVisible(false);
-    console.log("closed");
+    console.log('closed');
   };
 
   return (
@@ -40,7 +53,7 @@ export default function AddApplication() {
             placeholder="Company Name"
             // contentLeft={<Mail fill="currentColor" />}
           />
-          
+
           <Input
             clearable
             bordered
@@ -78,11 +91,19 @@ export default function AddApplication() {
             // contentLeft={<Mail fill="currentColor" />}
           />
           <Dropdown>
-            <Dropdown.Button flat>Status</Dropdown.Button>
-            <Dropdown.Menu aria-label="Single selection actions">
+            <Dropdown.Button flat>{selectedValue}</Dropdown.Button>
+            <Dropdown.Menu
+              aria-label="Single selection actions"
+              disallowEmptySelection
+              selectionMode="single"
+              selectedKeys={selected}
+              onSelectionChange={setSelected}
+            >
               <Dropdown.Item key="applied">Applied</Dropdown.Item>
               <Dropdown.Item key="phoneScreen">Phone Screen</Dropdown.Item>
-              <Dropdown.Item key="behavioralInterview">Behavioral Interview</Dropdown.Item>
+              <Dropdown.Item key="behavioralInterview">
+                Behavioral Interview
+              </Dropdown.Item>
               <Dropdown.Item key="technicalInterview">
                 Technical Interview
               </Dropdown.Item>
