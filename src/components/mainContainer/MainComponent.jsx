@@ -8,48 +8,10 @@ import {
   Text,
   Button,
 } from '@nextui-org/react';
-// import Row from 'TableRow.jsx';
+// import AddApplication from './AddApplication.jsx';
 
-export default function MainComponent() {
-  const columns = [
-    {
-      key: 'company_name',
-      label: 'Company Name',
-    },
-    {
-      key: 'date_applied',
-      label: 'Date Applied',
-    },
-    {
-      key: 'position_name',
-      label: 'Position',
-    },
-    {
-      key: 'city_name',
-      label: 'City',
-    },
-    {
-      key: 'notes_txt',
-      label: 'Notes',
-    },
-    {
-      key: 'status',
-      label: 'Status',
-    },
-    {
-      key: 'application_type',
-      label: 'Application Type',
-    },
-    {
-      key: 'listing_link',
-      label: 'Link To Listing',
-    },
-    {
-      key: 'action',
-      label: '',
-    },
-  ];
-  // const [cell, setCell] = useState(rows)
+export default function MainComponent(props) {
+  const { columns, rows } = props;
   //fetch call to db to get data, formatted into array of instances
   //add edit button to each instance
   // async function getJobData() {
@@ -69,19 +31,7 @@ export default function MainComponent() {
   //   } catch (err) {}
   // }
   //EXAMPLE
-  const rows = [
-    {
-      key: '1',
-      company_name: 'Disney',
-      date_applied: '11/23/2011',
-      position_name: 'Senior Engineer',
-      city_name: 'Remote',
-      notes_txt: 'I like it',
-      status: 'applied',
-      application_type: 'applied',
-      listing_link: 'http:asdfasdf.com',
-    },
-  ];
+
 
   function renderCell(job, columnKey) {
     console.log('job: ', job);
